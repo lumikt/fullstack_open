@@ -6,14 +6,14 @@ const Button = ({ handleClick, text }) => (
   </button>
 )
 
-const SatisticLine = ({ text, value }) => {
+const StatisticLine = ({ text, value }) => {
   if (text === 'positive') {
     return (
-      <><td>{text}</td> <td>{value} % </td></>
+      <><td>{text}</td><td>{value} % </td></>
     )
   }
   return (
-  <><td>{text}</td> <td>{value} </td></>
+  <><td>{text}</td><td>{value} </td></>
   )
 }
 
@@ -33,12 +33,12 @@ const Statistics = ({ good, neutral, bad, total }) => {
       <h1>statistics</h1>
       <table>
         <tbody>
-          <tr><SatisticLine text='good' value={good} /></tr>
-          <tr><SatisticLine text='neutral' value={neutral} /></tr>
-          <tr><SatisticLine text='bad' value={bad} /></tr>
-          <tr><SatisticLine text='all' value={total} /></tr>
-          <tr><SatisticLine text='average' value={average} /></tr>
-          <tr><SatisticLine text='positive' value={positive} /></tr>
+          <tr><StatisticLine text='good' value={good} /></tr>
+          <tr><StatisticLine text='neutral' value={neutral} /></tr>
+          <tr><StatisticLine text='bad' value={bad} /></tr>
+          <tr><StatisticLine text='all' value={total} /></tr>
+          <tr><StatisticLine text='average' value={average} /></tr>
+          <tr><StatisticLine text='positive' value={positive} /></tr>
         </tbody>
       </table>
     </div>
