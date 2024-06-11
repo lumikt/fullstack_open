@@ -6,7 +6,6 @@ const Button = ({ handleClick,text }) => (
     </button>
 )
 
-
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -18,14 +17,18 @@ const App = () => {
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when dianosing patients.',
     'The only way to go fast, is to go well.'
   ]
-  const pointsT = Array(anecdotes.length).fill(0)
 
   const [selected, setSelected] = useState(0)
-  const [points, setPoints] = useState(pointsT)
+  const [points, setPoints] = useState(Array(anecdotes.length).fill(0))
+  const [winner, setWinner] = useState(0)
 
   const handleVoteClick = () => {
     const copy = {...points}
     copy[selected] += 1
+    if (copy[selected] > points[winner]) {
+      console.log('Updating winner from', winner, 'to', selected)
+      setWinner(selected)
+    }
     console.log('Old points',points, 'new points ', copy)
     setPoints(copy)
   }
@@ -39,10 +42,14 @@ const App = () => {
 
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       {anecdotes[selected]}<br/>
       This has {points[selected]} votes <br/>
       <Button handleClick={handleVoteClick} text='vote' />
       <Button handleClick={handleRandomClick} text="Next anecdote" />
+      <h1>Anecdote with most votes</h1>
+      {anecdotes[winner]}<br/>
+      has {points[winner]} votes
     </div>
   )
 }
