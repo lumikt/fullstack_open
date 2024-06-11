@@ -45,7 +45,6 @@ const Statistics = ({ good, neutral, bad, total }) => {
   )
 }
 
-
 const App = () => {
   // tallenna napit omaan tilaansa
 
