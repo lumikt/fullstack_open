@@ -26,7 +26,6 @@ const App = () => {
   )
 }
 
-
 const Header = ({name}) => {
   console.log(name)
   return (
