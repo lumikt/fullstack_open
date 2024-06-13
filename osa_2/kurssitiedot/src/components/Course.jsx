@@ -9,7 +9,6 @@ const Course = ({ course }) => {
 
     const total = parts.reduce( (sum, part) => {
       console.log('wtf?',sum,part.exercises)
-      
       return sum += part.exercises
     },0)
 
