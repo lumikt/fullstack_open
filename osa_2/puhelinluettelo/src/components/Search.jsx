@@ -1,10 +1,5 @@
-const Search = ({ newSearch, setNewSearch }) => {
+const Search = ({ newSearch, handleSearchChange }) => {
     
-    const handleSearchChange = (event) => {
-        setNewSearch(event.target.value)
-        console.log(newSearch)
-    }
-
     return (
     <form>
     <div>

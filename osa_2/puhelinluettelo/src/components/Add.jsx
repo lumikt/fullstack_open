@@ -1,38 +1,6 @@
-const Add = ({ newName, setNewName, newNumber,setNewNumber, persons, setPersons }) => {
-
-    const addNumber = (event) =>{
-        event.preventDefault()
-        console.log('I got clicked')
+const Add = ({ newName, handleNameChange, newNumber, handleNumberChange, addNumber }) => {
     
-        const nameExists =  persons.some(person => person.name === newName)
-        if (nameExists) {
-          console.log('It exists')
-          let existingName = newName
-          setNewName('')
-          setNewNumber('')
-          
-          return alert(`${existingName} is already in your phonebook`)
-          }
-    
-        const personObject ={
-          name: newName,
-          number: newNumber
-        }
-        console.log('I come here')
-        setPersons(persons.concat(personObject))
-        setNewName('')
-        setNewNumber('')
-    }
-
-    const handleNameChange =(event) => {
-        setNewName(event.target.value)
-    }
-    
-    const handleNumberChange =(event) => {
-        setNewNumber(event.target.value)
-    }
-    
-    return (
+  return (
     <>
     <h2>Add a new number</h2>
       <form>
