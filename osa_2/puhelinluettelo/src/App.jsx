@@ -1,5 +1,4 @@
 import { useState,useEffect } from 'react'
-import axios from 'axios'
 import Search from './components/Search'
 import Add from './components/Add'
 import Numbers from './components/Numbers'
@@ -66,14 +65,20 @@ const handleNumberChange =(event) => {
   setNewNumber(event.target.value)
 }
 
-
+const deletePerson = (id) => {
+  //console.log('delete me, im note',id)
+  personService
+    .deletePerson(id)
+    .then(setPersons(persons.filter(person => person.id !== id)))
+    
+}
   
   return (
     <div>
       <h2>Phonebook</h2>
       <Search newSearch={newSearch} handleSearchChange={handleSearchChange} />
       <Add newName={newName} handleNameChange={handleNameChange} newNumber={newNumber} handleNumberChange={handleNumberChange} addNumber={addNumber} />
-      <Numbers persons={persons} newSearch={newSearch} />
+      <Numbers persons={persons} newSearch={newSearch} deletePerson={deletePerson} />
     </div>
   )
 
