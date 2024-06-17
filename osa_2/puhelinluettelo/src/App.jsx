@@ -3,6 +3,7 @@ import axios from 'axios'
 import Search from './components/Search'
 import Add from './components/Add'
 import Numbers from './components/Numbers'
+import personService from './services/persons'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -13,8 +14,8 @@ const App = () => {
   
   useEffect(() => {
     console.log('effect')
-    axios
-      .get('http://localhost:3001/persons')
+    personService
+      .getAll()
       .then(response => {
         console.log('promise fulfilled')
         setPersons(response.data)
@@ -43,10 +44,16 @@ const addNumber = (event) =>{
 
   const personObject ={
     name: newName,
-    number: newNumber
+    number: newNumber,
+    id: (persons.length+1).toString()
   }
   console.log('I come here')
-  setPersons(persons.concat(personObject))
+  personService
+    .create(personObject)
+    .then(response => {
+      console.log(response)
+      setPersons(persons.concat(response.data))
+    })
   setNewName('')
   setNewNumber('')
 }
