@@ -32,20 +32,31 @@ const addNumber = (event) =>{
   console.log('I got clicked')
 
   const nameExists =  persons.some(person => person.name === newName)
+  
   if (nameExists) {
     console.log('It exists')
-    let existingName = newName
+    const person = persons.find(person => person.name === newName)
+
+    if (confirm(`${person.name} is already in your phonebook, would you like to replace the old number?`)) {
+      const changedPerson = {...person, number: newNumber}
+      
+      personService
+        .update(changedPerson)
+        .then(response =>{
+          setPersons(persons.map(person => person.id !== changedPerson.id ? person : response.data))
+        })
+    }
     setNewName('')
     setNewNumber('')
-    
-    return alert(`${existingName} is already in your phonebook`)
-    }
-
+    return
+  }
+  
   const personObject ={
     name: newName,
     number: newNumber,
     id: (persons.length+1).toString()
   }
+
   console.log('I come here')
   personService
     .create(personObject)

@@ -13,4 +13,8 @@ const deletePerson = id => {
     console.log('Tried deleting', id)
     return (axios.delete(`${baseUrl}/${id}`))
 }
-export default {getAll, create, deletePerson}
+
+const update = person =>{
+    return axios.put((`${baseUrl}/${person.id}`),person)
+}
+export default {getAll, create, deletePerson, update}
