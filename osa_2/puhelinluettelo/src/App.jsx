@@ -3,13 +3,14 @@ import Search from './components/Search'
 import Add from './components/Add'
 import Numbers from './components/Numbers'
 import personService from './services/persons'
+import Notification from './components/Notification'
 
 const App = () => {
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newSearch, setNewSearch] = useState('')
-
+  const [message, setMessage] = useState('I have a message for you')
   
   useEffect(() => {
     console.log('effect')
@@ -64,8 +65,12 @@ const addNumber = (event) =>{
       console.log(response)
       setPersons(persons.concat(response.data))
     })
+  setMessage(`${newName} added to phonebook`)
   setNewName('')
   setNewNumber('')
+  setTimeout(()=> {
+    setMessage(null)
+  }, 3000)
 }
 
 const handleNameChange =(event) => {
@@ -78,15 +83,20 @@ const handleNumberChange =(event) => {
 
 const deletePerson = (id) => {
   //console.log('delete me, im note',id)
+  const deletedPerson = persons.filter(person => person.id === id)  
   personService
     .deletePerson(id)
     .then(setPersons(persons.filter(person => person.id !== id)))
-    
+  setMessage(`${deletedPerson[0].name} was sucessfully removed from your phonebook.`)
+  setTimeout(() =>{
+    setMessage(null)
+  },3000)
 }
   
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={message} />
       <Search newSearch={newSearch} handleSearchChange={handleSearchChange} />
       <Add newName={newName} handleNameChange={handleNameChange} newNumber={newNumber} handleNumberChange={handleNumberChange} addNumber={addNumber} />
       <Numbers persons={persons} newSearch={newSearch} deletePerson={deletePerson} />
