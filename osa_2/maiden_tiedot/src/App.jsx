@@ -26,7 +26,7 @@ function App() {
 
   return (
     <>
-      <h1>Hello world</h1>
+      <h1>Country search</h1>
       <Search countryName={newCountryName} handleNameChange={handleNameChange} />
       <Countries countryList={countryList} newCountryName={newCountryName} setNewCountryName={setNewCountryName} /> 
     </>
