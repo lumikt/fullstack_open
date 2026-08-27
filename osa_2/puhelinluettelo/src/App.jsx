@@ -93,7 +93,10 @@ const handleNumberChange =(event) => {
 
 const deletePerson = (id) => {
   //console.log('delete me, im note',id)
-  const deletedPerson = persons.filter(person => person.id === id)  
+
+  const deletedPerson = persons.filter(person => person.id === id)
+  
+  if (confirm(`Delete ${deletedPerson[0].name}?`)) {  
   personService
     .deletePerson(id)
     .then(setPersons(persons.filter(person => person.id !== id)))
@@ -101,7 +104,7 @@ const deletePerson = (id) => {
   setTimeout(() =>{
     setMessage(null)
   },3000)
-}
+}}
   
   return (
     <div>
